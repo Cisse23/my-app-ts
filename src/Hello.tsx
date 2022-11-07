@@ -4,10 +4,10 @@ interface HelloProps{
     age?: number; // ? valinnainen
 }
 function Hello(props: HelloProps){
-    const [message, setMessage] = useState('');
+    const [message, setMessage] = useState('How you doin?');
 
     return(
-        <>Hello {props.name}</>
+        <>Hello {props.name}. {message}</>
     )
 }
 

@@ -2,18 +2,22 @@ import React, { useState } from 'react';
 import { AddTodoForm } from './AddTodoForm';
 import Hello from './Hello';
 import { TodoList } from './TodoList';
-import { Todo, AddTodo } from './types.d'
+import { Todo, AddTodo, DeleteTodo } from './types.d'
 
 const testTodos: Todo[] = [
   {
-    text: 'Create todos',
+    description: 'Create todos',
     complete: false, 
+    date: new Date("2022-01-01"),
+    priority: 'Low'
   },
   {
-    text: 'Get started',
+    description: 'Get started',
     complete: true,
+    date: new Date("2022-03-03"),
+    priority: 'Medium'
   },
-]
+];
 
 
 function App() {
@@ -32,18 +36,21 @@ function App() {
     setTodos(newTodos);
   };
 
-const addTodo: AddTodo = (text: string) => {
-  const newTodo = {text, complete: false};
-  setTodos([newTodo, ...todos]);
-};
+  const addTodo: AddTodo = (description: string, date: Date, priority: string) => {
+    const newTodo = {description, date, priority, complete: false};
+    setTodos([newTodo, ...todos]);
+  };
+
+  const DeleteTodo = (selectedTodo: Todo) => {
+    console.log("Clicked delete on " + selectedTodo.description );
+    setTodos(todos.filter((todo, i) => selectedTodo !== todo))
+  };
 
   return (
     <div>
       <Hello name='Stranger'/>
-      <ul>
-        <TodoList todos={todos} toggleComplete={ToggleComplete} />
-      </ul>
       <AddTodoForm addTodo={addTodo} />
+      <TodoList todos={todos} toggleComplete={ToggleComplete} deleteTodo={DeleteTodo} />
     </div>
   );
 }

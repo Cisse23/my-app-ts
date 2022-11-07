@@ -1,10 +1,12 @@
 export interface Todo {
-  text: string;
+  description: string;
   complete: boolean;
+  date: Date;
+  priority: string;
 }
 
 export type ToggleComplete = (selectedTodo: Todo) => void;
 
-export type AddTodo = (text: string) => void;
+export type AddTodo = (description: string, date: Date, priority: string) => void;
 
-//export default {Todo, ToggleComplete}
+export type DeleteTodo = (todo: Todo) => void;
